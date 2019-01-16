@@ -1,0 +1,36 @@
+﻿@using Newsfeed.Models.Home;
+
+@model IndexVM
+
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Articles</h1>
+    <div class="row">
+        @foreach (var item in Model.ArticleSummaries)
+        {
+        <div class="col-sm-4">
+            <div class="card text-left mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Headline)</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CreatedByUserName)</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.CreatedDate)</h6>
+                    <p class="card-text mb-2">@Html.DisplayFor(modelItem => item.BodyPreview)</p>
+                    <div class="card-text mb-2 text-muted">
+                        <span>@Html.DisplayFor(modelItem => item.NumLikes) Likes&nbsp;&nbsp;@Html.DisplayFor(modelItem => item.NumComments) Comments</span>
+                    </div>
+                    @if (item.CreatedByUserName == User.Identity.Name)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="card-link">Edit</a>
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id" class="card-link">Read</a>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
