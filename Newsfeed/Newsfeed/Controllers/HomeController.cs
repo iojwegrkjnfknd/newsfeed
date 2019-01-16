@@ -54,10 +54,6 @@ namespace Newsfeed.Controllers
 
             HttpContext.Session.Set<List<Article>>(SessionKeyArticles, dbArticles);
 
-            var article = dbArticles.FirstOrDefault(d => d.Id == model.Id);
-            if (article == null)
-                return StatusCode(StatusCodes.Status500InternalServerError);
-
             return RedirectToAction("Details", new { id = model.Id });
         }
 
